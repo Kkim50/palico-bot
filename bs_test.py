@@ -1,10 +1,9 @@
-import requests
-from bs4 import BeautifulSoup
+from bs import try_load_html_as_soup
 
-url = 'https://mhgu.kiranico.com/quest'
-page = requests.get(url)
+filename = 'data/quests.html'
+URL = 'https://mhgu.kiranico.com/quest'
 
-soup = BeautifulSoup(page.content, 'html.parser')
+soup = try_load_html_as_soup(filename, URL)
 
 results = soup.find(id='s0-1')
 tr_list = results.find_all('tr')
