@@ -10,8 +10,15 @@ soup = try_load_html_as_soup(filename, URL)
 
 bot = commands.Bot(command_prefix='!')
 
-def findVillageQuests(id):
-    results = soup.find(id='s0-'+id)
+def findKeyQuests(id, _type):
+    identifier = ""
+    if _type == "village":
+        identifier = "s0-"+id
+        print(identifier)
+    if _type == "hub":
+        identifier = "s1-"+id
+        
+    results = soup.find(id=identifier)
     tr_list = results.find_all('tr')
     quest_infos = []
     key_quests = []
@@ -25,17 +32,13 @@ def findVillageQuests(id):
             key_quests.append(quest_name)
     return key_quests
 
-def findHubQuests(id):
-    results = soup.find(id="")
-
 @bot.event
 async def on_ready():
     print('{} has connected to Discord!'.format(bot.user))
 
 @bot.command("key")
-async def keyquest(ctx, type, id):
-    if type == "village" or "": 
-        keyquests = findVillageQuests(id)
-        await ctx.send(keyquests)
+async def keyquest(ctx, _type, id):
+    keyquests = findKeyQuests(id, _type)
+    await ctx.send(keyquests)
 
 bot.run(token)
