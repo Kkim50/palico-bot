@@ -14,10 +14,18 @@ def findKeyQuests(id, _type):
     identifier = ""
     if _type == "village":
         identifier = "s0-"+id
-        print(identifier)
     if _type == "hub":
-        identifier = "s1-"+id
-        
+        if id == "8" or id == "9" or  id == "10" or id == "11":
+            id = int(id) + 4
+        elif id == "g1":
+            id = 11
+        elif id == "g2":
+            id = 12
+        elif id == "g3":
+            id = 13
+        elif id == "g4":
+            id = 13
+        identifier = "s1-"+str(id) 
     results = soup.find(id=identifier)
     tr_list = results.find_all('tr')
     quest_infos = []
