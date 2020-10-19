@@ -30,11 +30,11 @@ def itemFinder(soup, rank):
         row = i.find_all("td")
         if len(row) > 0:
             if row[0].find(text="Low Rank"):
-                low_rank.append([x.text.strip() for x in row[0:8]])
+                low_rank.append([x.text.strip() for x in row[1:8]])
             if row[0].find(text="High Rank"):
-                high_rank.append([x.text.strip() for x in row[0:8]])
+                high_rank.append([x.text.strip() for x in row[1:8]])
             if row[0].find(text="G Rank"):
-                g_rank.append([x.text.strip() for x in row[0:8]])
+                g_rank.append([x.text.strip() for x in row[1:8]])
     if(rank == "High"):
         return high_rank
     if(rank == "Low"):
@@ -81,7 +81,17 @@ async def on_ready():
 async def items(ctx, item_name, rank):
     soup = findItemPage(item_name.title())
     itemData = itemFinder(soup, rank.title())
-    await ctx.send(itemData)
+    # print(itemData)
+    msg = ''
+    for data in itemData:
+        msg += '\n' + ' '.join(data)
+    if len(msg) >= 2000:
+        msg_first = msg[:len(msg) // 2]
+        msg_second = msg[len(msg) // 2:]
+        await ctx.send(msg_first)
+        await ctx.send(msg_second)
+    else:
+        await ctx.send(msg)
 
 @bot.command("key")
 async def keyquest(ctx, quest_type, quest_id):
