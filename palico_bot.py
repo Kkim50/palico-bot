@@ -9,23 +9,18 @@ URL = 'https://mhgu.kiranico.com/quest'
 soup = try_load_html_as_soup(filename, URL)
 
 bot = commands.Bot(command_prefix='!')
+hub_edgecases = {8: 12, 9: 13, 10: 14, 11: 15,
+                 "g1": 11, "g2": 12, "g3": 13, "g4": 14}
+
 
 def findKeyQuests(id, _type):
     identifier = ""
     if _type == "village":
         identifier = "s0-"+id
     if _type == "hub":
-        if id == "8" or id == "9" or  id == "10" or id == "11":
-            id = int(id) + 4
-        elif id == "g1":
-            id = 11
-        elif id == "g2":
-            id = 12
-        elif id == "g3":
-            id = 13
-        elif id == "g4":
-            id = 13
-        identifier = "s1-"+str(id) 
+        if id in hub_edgecases:
+            id = hub_edgecases[id]
+        identifier = "s1-"+str(id)
     results = soup.find(id=identifier)
     tr_list = results.find_all('tr')
     quest_infos = []
@@ -40,9 +35,11 @@ def findKeyQuests(id, _type):
             key_quests.append(quest_name)
     return key_quests
 
+
 @bot.event
 async def on_ready():
     print('{} has connected to Discord!'.format(bot.user))
+
 
 @bot.command("key")
 async def keyquest(ctx, _type, id):
