@@ -95,7 +95,7 @@ async def items(ctx, item_name, rank):
 
 @bot.command("key")
 async def keyquest(ctx, quest_type, quest_id):
-    keyquests = findKeyQuests(id, quest_type)
+    keyquests = findKeyQuests(quest_id, quest_type)
     await ctx.send(keyquests)
 
 bot.run(token)
