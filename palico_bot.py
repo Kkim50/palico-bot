@@ -35,17 +35,16 @@ def itemFinder(soup, rank):
                 high_rank.append([x.text.strip() for x in row[0:8]])
             if row[0].find(text="G Rank"):
                 g_rank.append([x.text.strip() for x in row[0:8]])
-    if(rank == "high"):
+    if(rank == "High"):
         return high_rank
-    if(rank == "low"):
+    if(rank == "Low"):
         return low_rank
-    if(rank == "g"):
+    if(rank == "G"):
         return g_rank
     return low_rank, high_rank, g_rank
 
 def findItemPage(item_data):
     soup = soupLoader("items")
-    try:
     item_link = soup.find("a", text=item_data)
     link = item_link["href"]
     filename = "data/item_"+item_data.strip()+".html"
@@ -78,11 +77,10 @@ def findKeyQuests(quest_id, quest_type):
 async def on_ready():
     print('{} has connected to Discord!'.format(bot.user))
 
-
 @bot.command("item")
-async def keyquest(ctx, item_name, rank):
-    soup = findItemPage(item_name)
-    itemData = itemFinder(soup, rank)
+async def items(ctx, item_name, rank):
+    soup = findItemPage(item_name.title())
+    itemData = itemFinder(soup, rank.title())
     await ctx.send(itemData)
 
 @bot.command("key")
