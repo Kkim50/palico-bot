@@ -99,4 +99,10 @@ async def keyquest(ctx, quest_type, quest_id):
     keyquests = findKeyQuests(quest_id, quest_type)
     await ctx.send(keyquests)
 
+def load_token_from_file(filename):
+    with open(filename, 'r') as f:
+        token = f.read()
+    return token
+
+token = load_token_from_file('bot_token.txt')
 bot.run(token)
