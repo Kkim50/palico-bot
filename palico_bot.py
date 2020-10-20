@@ -78,11 +78,12 @@ async def on_ready():
     print('{} has connected to Discord!'.format(bot.user))
 
 @bot.command("item")
-async def items(ctx, item_name, rank):
+async def items(ctx, *args): 
+    item_name = " ".join(args[0:-1])
+    rank = args[-1]
     soup = findItemPage(item_name.title())
     itemData = itemFinder(soup, rank.title())
-    # print(itemData)
-    msg = ''
+    msg = item_name.title() + " [" + rank.title() + " Rank]"
     for data in itemData:
         msg += '\n' + ' '.join(data)
     if len(msg) >= 2000:
