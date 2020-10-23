@@ -39,7 +39,6 @@ def itemFinder(soup, rank):
                 high_rank.append([x.text.strip() for x in row[1:8]])
             if row[0].find(text="G Rank"):
                 g_rank.append([x.text.strip() for x in row[1:8]])
-
     if rank.lower() in high_rank_list:
         return high_rank
     if rank.lower() in low_rank_list:
@@ -58,9 +57,9 @@ def findItemPage(item_data):
 
 def findKeyQuests(quest_id, quest_type):
     soup = soupLoader("quests")
-    if quest_type == "village":
+    if quest_type.lower() == "village":
         quest_id = "s0-"+quest_id
-    if quest_type == "hub":
+    if quest_type.lower() == "hub":
         if quest_id in hub_edgecases:
             quest_id = hub_edgecases[id]
         quest_id = "s1-"+str(quest_id)
@@ -78,16 +77,23 @@ def findKeyQuests(quest_id, quest_type):
             key_quests.append(quest_name)
     return key_quests
 
+def getCommandPosition(args, search_list):
+    position = -1
+    args = list(args)
+    for i,item in enumerate(args):
+        if item.lower() in search_list:
+            position = i
+    if(position == -1):
+        print("Command  not supported!")
+    return position
+
 @bot.event
 async def on_ready():
     print('{} has connected to Discord!'.format(bot.user))
 
 @bot.command("item")
 async def items(ctx, *args): 
-    for i,item in enumerate(args):
-        if item in rank_list:
-            rank_position = i
-
+    rank_position = getCommandPosition(args, rank_list)
     if rank_position == len(args)-1:
         item_name = " ".join(args[0:rank_position])
     else:
@@ -108,7 +114,15 @@ async def items(ctx, *args):
         await ctx.send(msg)
 
 @bot.command("key")
-async def keyquest(ctx, quest_type, quest_id):
+async def keyquest(ctx, *args):
+    quest_position = getCommandPosition(args, ["hub", "village"])
+    quest_type = args[quest_position]
+
+    for i, item in enumerate(args):
+        if item.isdigit():
+            quest_id_position = i
+            
+    quest_id = args[quest_id_position]
     keyquests = findKeyQuests(quest_id, quest_type)
     await ctx.send(keyquests)
 
