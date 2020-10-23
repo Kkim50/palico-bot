@@ -2,10 +2,11 @@
 
 Hello! This is a discord bot focused around Monster Hunter. (Only MHGU is supported for now)
 
-# Commands
+# Commands (any order, not case-sensitive)
+
 !key arg1 arg2
 
-arg1 = type of quest (village, hub, or g)
+arg1 = type of quest (village, hub)
 
 arg2 = star
 
