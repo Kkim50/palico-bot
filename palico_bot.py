@@ -7,6 +7,10 @@ from bs import try_load_html_as_soup
 bot = commands.Bot(command_prefix='!')
 hub_edgecases = {8: 12, 9: 13, 10: 14, 11: 15,
                  "g1": 11, "g2": 12, "g3": 13, "g4": 14}
+high_rank_list = ["hr", "high", "h"]
+low_rank_list = ["lr", "low", "l"]
+g_rank_list = ["g", "g-rank"]
+rank_list = high_rank_list + low_rank_list + g_rank_list
 
 def soupLoader(command):
     if command == "quests":
@@ -35,13 +39,14 @@ def itemFinder(soup, rank):
                 high_rank.append([x.text.strip() for x in row[1:8]])
             if row[0].find(text="G Rank"):
                 g_rank.append([x.text.strip() for x in row[1:8]])
-    if(rank == "High"):
+
+    if rank.lower() in high_rank_list:
         return high_rank
-    if(rank == "Low"):
+    if rank.lower() in low_rank_list:
         return low_rank
-    if(rank == "G"):
+    if rank.lower() in g_rank_list:
         return g_rank
-    return low_rank, high_rank, g_rank
+    return low_rank + high_rank + g_rank
 
 def findItemPage(item_data):
     soup = soupLoader("items")
@@ -80,11 +85,11 @@ async def on_ready():
 @bot.command("item")
 async def items(ctx, *args): 
     for i,item in enumerate(args):
-        if item == "low" or item == "high" or item == "hr" or item =="lr" or item == "g":
+        if item in rank_list:
             rank_position = i
 
-    if rank_position == args[-1]:
-        item_name = " ".join(args[0:rank_position+1])
+    if rank_position == len(args)-1:
+        item_name = " ".join(args[0:rank_position])
     else:
          item_name = " ".join(args[rank_position+1:])
 
