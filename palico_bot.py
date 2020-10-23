@@ -79,8 +79,16 @@ async def on_ready():
 
 @bot.command("item")
 async def items(ctx, *args): 
-    item_name = " ".join(args[0:-1])
-    rank = args[-1]
+    for i,item in enumerate(args):
+        if item == "low" or item == "high" or item == "hr" or item =="lr" or item == "g":
+            rank_position = i
+
+    if rank_position == args[-1]:
+        item_name = " ".join(args[0:rank_position+1])
+    else:
+         item_name = " ".join(args[rank_position+1:])
+
+    rank = args[rank_position]
     soup = findItemPage(item_name.title())
     itemData = itemFinder(soup, rank.title())
     msg = item_name.title() + " [" + rank.title() + " Rank]"
