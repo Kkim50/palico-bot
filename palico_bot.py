@@ -22,30 +22,34 @@ def soupLoader(command):
     soup = try_load_html_as_soup(filename, URL)
     return soup
 
-def itemFinder(soup, rank):
+def itemFinder(soup, rank, category):
     low_rank = []
     high_rank = []
     g_rank = []
-
-    map_snipet = soup.find("h5",text="Map")
-    container = map_snipet.find_next("table")
-    container = container.find_all("tr")
-    for i in container:
-        row = i.find_all("td")
-        if len(row) > 0:
-            if row[0].find(text="Low Rank"):
-                low_rank.append([x.text.strip() for x in row[1:8]])
-            if row[0].find(text="High Rank"):
-                high_rank.append([x.text.strip() for x in row[1:8]])
-            if row[0].find(text="G Rank"):
-                g_rank.append([x.text.strip() for x in row[1:8]])
-    if rank.lower() in high_rank_list:
-        return high_rank
-    if rank.lower() in low_rank_list:
-        return low_rank
-    if rank.lower() in g_rank_list:
-        return g_rank
-    return low_rank + high_rank + g_rank
+    try:
+        map_snipet = soup.find("h5",text=category)
+        container = map_snipet.find_next("table")
+        container = container.find_all("tr")
+        for i in container:
+            row = i.find_all("td")
+            if len(row) > 0:
+                if row[0].find(text="Low Rank"):
+                    low_rank.append([x.text.strip() for x in row[1:8]])
+                if row[0].find(text="High Rank"):
+                    high_rank.append([x.text.strip() for x in row[1:8]])
+                if row[0].find(text="G Rank"):
+                    g_rank.append([x.text.strip() for x in row[1:8]])
+        if rank.lower() in high_rank_list:
+            return high_rank
+        if rank.lower() in low_rank_list:
+            return low_rank
+        if rank.lower() in g_rank_list:
+            return g_rank
+        return low_rank + high_rank + g_rank
+    
+    except Exception as e:
+        print(e)
+        print(category.title() + " doesn't exist for this item.")
 
 def findItemPage(item_data):
     soup = soupLoader("items")
@@ -78,14 +82,16 @@ def findKeyQuests(quest_id, quest_type):
     return key_quests
 
 def getCommandPosition(args, search_list):
-    position = -1
-    args = list(args)
-    for i,item in enumerate(args):
-        if item.lower() in search_list:
-            position = i
-    if(position == -1):
-        print("Command  not supported!")
-    return position
+    try:
+        args = list(args)
+        for i,item in enumerate(args):
+            if item.lower() in search_list:
+                position = i
+        return position
+
+    except Exception as e:
+        print(e)
+        print("Error: Command  not supported!")
 
 @bot.event
 async def on_ready():
@@ -101,17 +107,46 @@ async def items(ctx, *args):
 
     rank = args[rank_position]
     soup = findItemPage(item_name.title())
-    itemData = itemFinder(soup, rank.title())
-    msg = item_name.title() + " [" + rank.title() + " Rank]"
-    for data in itemData:
-        msg += '\n' + ' '.join(data)
-    if len(msg) >= 2000:
-        msg_first = msg[:len(msg) // 2]
-        msg_second = msg[len(msg) // 2:]
-        await ctx.send(msg_first)
-        await ctx.send(msg_second)
-    else:
-        await ctx.send(msg)
+
+    #Get categories of item data
+    itemMapData = itemFinder(soup, rank.title(), "Map")
+    itemDropData = itemFinder(soup, rank.title(), "Monster")
+    itemQuestData = itemFinder(soup, rank.title(), "Quest")
+
+    if rank.lower in high_rank_list:
+        rank = "High Rank"
+    if rank.lower in low_rank_list:
+        rank = "Low Rank"
+    if rank.lower in g_rank_list:
+        rank = "G Rank"
+
+    #Print
+    mapMsg = item_name.title() + " [" + rank.title() + " - Map]"
+    monsterMsg = item_name.title() + " [" + rank.title() + " - Monster]"
+    questMsg = item_name.title() + " [" + rank.title() + " - Quest]"
+
+    #Send out messages
+    await limitMessages(ctx, itemMapData, mapMsg)
+    await limitMessages(ctx, itemDropData, monsterMsg)
+    if "quest".casefold() in args:
+        await limitMessages(ctx, itemQuestData, questMsg)
+
+async def limitMessages(ctx, datalist, msg):
+    try:
+        for data in datalist:
+            msg += '\n' + ' '.join(data)
+        if len(msg) >= 2000:
+            msg_first = msg[:len(msg) // 2]
+            msg_second = msg[len(msg) // 2:]
+            await ctx.send(msg_first)
+            await ctx.send(msg_second)
+        else:
+            await ctx.send(msg)
+        
+    except Exception as e:
+        print(e)
+        print("Error: Category does not exist for this item!")
+
 
 @bot.command("key")
 async def keyquest(ctx, *args):
