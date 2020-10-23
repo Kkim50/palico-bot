@@ -113,11 +113,11 @@ async def items(ctx, *args):
     itemDropData = itemFinder(soup, rank.title(), "Monster")
     itemQuestData = itemFinder(soup, rank.title(), "Quest")
 
-    if rank.lower in high_rank_list:
+    if rank.lower() in high_rank_list:
         rank = "High Rank"
-    if rank.lower in low_rank_list:
+    if rank.lower() in low_rank_list:
         rank = "Low Rank"
-    if rank.lower in g_rank_list:
+    if rank.lower() in g_rank_list:
         rank = "G Rank"
 
     #Print
@@ -142,6 +142,7 @@ async def limitMessages(ctx, datalist, msg):
             await ctx.send(msg_second)
         else:
             await ctx.send(msg)
+        await ctx.send("\n")
         
     except Exception as e:
         print(e)
