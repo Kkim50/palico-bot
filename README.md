@@ -1,8 +1,8 @@
-## Palico-Bot
+# Palico-Bot
 
 Hello! This is a discord bot focused around Monster Hunter. (Only MHGU is supported for now)
 
-# Commands (any order, not case-sensitive)
+## Commands (any order, not case-sensitive)
 
 #### Check Key Quests: ```!key arg1 arg2```
 
