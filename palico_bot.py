@@ -4,8 +4,6 @@ from discord.ext import commands
 from bs4 import BeautifulSoup
 from bs import try_load_html_as_soup
 
-const Discord = require("discord.js");
-const client = new Discord.Client();
 require('dotenv').config(); 
 bot = commands.Bot(command_prefix='!')
 hub_edgecases = {8: 12, 9: 13, 10: 14, 11: 15,

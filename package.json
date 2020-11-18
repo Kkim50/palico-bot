@@ -4,7 +4,7 @@
     "dotenv": "^8.2.0",
     "fontsource-roboto": "^3.0.3"
   },
-  "name": "Palico-Bot",
+  "name": "palico-bot",
   "description": "Hello! This is a discord bot focused around Monster Hunter. (Only MHGU is supported for now)",
   "version": "1.0.0",
   "main": "index.js",
@@ -17,7 +17,7 @@
     "url": "git+https://github.com/Kkim50/Palico-Bot.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "kimkat",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Kkim50/Palico-Bot/issues"
