@@ -1,1 +1,1 @@
-worker: python palico_bot.py
+worker: python3 palico_bot.py

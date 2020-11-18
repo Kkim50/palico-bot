@@ -4,7 +4,6 @@ from discord.ext import commands
 from bs4 import BeautifulSoup
 from bs import try_load_html_as_soup
 
-require('dotenv').config(); 
 bot = commands.Bot(command_prefix='!')
 hub_edgecases = {8: 12, 9: 13, 10: 14, 11: 15,
                  "g1": 11, "g2": 12, "g3": 13, "g4": 14}
