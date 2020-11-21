@@ -1,1 +1,1 @@
-worker: python3 palico_bot.py
+worker: flask app.py
