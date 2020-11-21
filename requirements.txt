@@ -22,9 +22,6 @@ jsonify==0.5
 keyring==10.6.0
 keyrings.alt==3.0
 MarkupSafe==1.1.1
-mccabe==0.6.1
-menulibre==2.2.0
-mugshot==0.4.0
 multidict==4.7.6
 netifaces==0.10.4
 numpy==1.19.2
