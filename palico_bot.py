@@ -12,6 +12,8 @@ low_rank_list = ["lr", "low", "l"]
 g_rank_list = ["g", "g-rank"]
 rank_list = high_rank_list + low_rank_list + g_rank_list
 
+response = "Error: Command Invalid"
+
 def soupLoader(command):
     if command == "quests":
         filename = 'data/quests.html'
@@ -130,6 +132,9 @@ async def items(ctx, *args):
     await limitMessages(ctx, itemDropData, monsterMsg)
     if "quest".casefold() in args:
         await limitMessages(ctx, itemQuestData, questMsg)
+    
+    #Send message to front-end
+    response = mapMsg + "\n" + monsterMsg
 
 async def limitMessages(ctx, datalist, msg):
     try:
@@ -161,6 +166,9 @@ async def keyquest(ctx, *args):
     quest_id = args[quest_id_position]
     keyquests = findKeyQuests(quest_id, quest_type)
     await ctx.send(keyquests)
+        
+    #Send message to front-end
+    response = keyquests
 
 def load_token_from_file(filename):
     with open(filename, 'r') as f:
