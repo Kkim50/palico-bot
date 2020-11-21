@@ -1,10 +1,7 @@
-import discord
 import requests
-from discord.ext import commands
 from bs4 import BeautifulSoup
 from bs import try_load_html_as_soup
 
-bot = commands.Bot(command_prefix='!')
 hub_edgecases = {8: 12, 9: 13, 10: 14, 11: 15,
                  "g1": 11, "g2": 12, "g3": 13, "g4": 14}
 high_rank_list = ["hr", "high", "h"]
@@ -12,7 +9,6 @@ low_rank_list = ["lr", "low", "l"]
 g_rank_list = ["g", "g-rank"]
 rank_list = high_rank_list + low_rank_list + g_rank_list
 
-app_flag = false
 response = "Error: Command Invalid"
 
 def soupLoader(command):
@@ -96,13 +92,8 @@ def getCommandPosition(args, search_list):
         print(e)
         print("Error: Command  not supported!")
 
-@bot.event
-async def on_ready():
-    if(app_flag == false):
-        print('{} has connected to Discord!'.format(bot.user))
 
-@bot.command("item")
-async def items(ctx, *args): 
+def items(ctx, *args): 
     rank_position = getCommandPosition(args, rank_list)
     if rank_position == len(args)-1:
         item_name = " ".join(args[0:rank_position])
@@ -128,36 +119,13 @@ async def items(ctx, *args):
     mapMsg = item_name.title() + " [" + rank.title() + " - Map]"
     monsterMsg = item_name.title() + " [" + rank.title() + " - Monster]"
     questMsg = item_name.title() + " [" + rank.title() + " - Quest]"
-
-    #Send out messages
-    await limitMessages(ctx, itemMapData, mapMsg)
-    await limitMessages(ctx, itemDropData, monsterMsg)
-    if "quest".casefold() in args:
-        await limitMessages(ctx, itemQuestData, questMsg)
     
     #Send message to front-end
-    response = mapMsg + "\n" + monsterMsg
-
-async def limitMessages(ctx, datalist, msg):
-    try:
-        for data in datalist:
-            msg += '\n' + ' '.join(data)
-        if len(msg) >= 2000:
-            msg_first = msg[:len(msg) // 2]
-            msg_second = msg[len(msg) // 2:]
-            await ctx.send(msg_first)
-            await ctx.send(msg_second)
-        else:
-            await ctx.send(msg)
-        await ctx.send("\n")
-        
-    except Exception as e:
-        print(e)
-        print("Error: Category does not exist for this item!")
+    response = itemMapData + "\n" + mapMsg + "\n" + monsterMsg
+    return response
 
 
-@bot.command("key")
-async def keyquest(ctx, *args):
+def keyquest(*args):
     quest_position = getCommandPosition(args, ["hub", "village"])
     quest_type = args[quest_position]
 
@@ -167,15 +135,7 @@ async def keyquest(ctx, *args):
             
     quest_id = args[quest_id_position]
     keyquests = findKeyQuests(quest_id, quest_type)
-    await ctx.send(keyquests)
-        
+
     #Send message to front-end
     response = keyquests
-
-def load_token_from_file(filename):
-    with open(filename, 'r') as f:
-        token = f.read()
-    return token
-
-token = load_token_from_file('bot_token.txt')
-bot.run(token)
+    return response
