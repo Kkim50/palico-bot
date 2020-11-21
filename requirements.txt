@@ -30,7 +30,6 @@ pycairo==1.16.2
 pycodestyle==2.5.0
 pycrypto==2.6.1
 PyJWT==1.5.3
-pylint==2.4.4
 python-apt==1.6.5+ubuntu0.3
 python-dateutil==2.8.1
 python-debian==0.1.32
