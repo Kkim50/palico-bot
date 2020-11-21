@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/palico-bot/static/css/main.923f7355.chunk.css",
+    "main.js": "/palico-bot/static/js/main.ec542e0c.chunk.js",
+    "main.js.map": "/palico-bot/static/js/main.ec542e0c.chunk.js.map",
+    "runtime-main.js": "/palico-bot/static/js/runtime-main.891b78ac.js",
+    "runtime-main.js.map": "/palico-bot/static/js/runtime-main.891b78ac.js.map",
+    "static/js/2.54fd0faf.chunk.js": "/palico-bot/static/js/2.54fd0faf.chunk.js",
+    "static/js/2.54fd0faf.chunk.js.map": "/palico-bot/static/js/2.54fd0faf.chunk.js.map",
+    "static/js/3.cfc3d4de.chunk.js": "/palico-bot/static/js/3.cfc3d4de.chunk.js",
+    "static/js/3.cfc3d4de.chunk.js.map": "/palico-bot/static/js/3.cfc3d4de.chunk.js.map",
+    "index.html": "/palico-bot/index.html",
+    "static/css/main.923f7355.chunk.css.map": "/palico-bot/static/css/main.923f7355.chunk.css.map",
+    "static/js/2.54fd0faf.chunk.js.LICENSE.txt": "/palico-bot/static/js/2.54fd0faf.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.891b78ac.js",
+    "static/js/2.54fd0faf.chunk.js",
+    "static/css/main.923f7355.chunk.css",
+    "static/js/main.ec542e0c.chunk.js"
+  ]
+}
