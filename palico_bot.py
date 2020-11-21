@@ -12,6 +12,7 @@ low_rank_list = ["lr", "low", "l"]
 g_rank_list = ["g", "g-rank"]
 rank_list = high_rank_list + low_rank_list + g_rank_list
 response = ""
+
 def soupLoader(command):
     if command == "quests":
         filename = 'data/quests.html'
