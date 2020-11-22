@@ -129,8 +129,7 @@ def items(*args):
     questMsg = item_name.title() + " [" + rank.title() + " - Quest]"
     
     #Send message to front-end
-    response = []
-    response.append(mapMsg, monsterMsg, questMsg)
+    response =  mapMsg + "\n" + monsterMsg + "\n" + questMsg
     return response
 
 def keyquest(*args):

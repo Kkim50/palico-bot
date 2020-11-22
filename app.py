@@ -28,7 +28,8 @@ def api_post():
 
         except Exception as e:
             print(e)
-            print("Error: Command  not supported!")
+            print("Error!")
+            return jsonify(plain_palico_bot.error)
 
         return jsonify(response)
     else:
