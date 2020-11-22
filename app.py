@@ -29,7 +29,8 @@ def api_post():
         except Exception as e:
             print(e)
             print("Error!")
-            return jsonify(plain_palico_bot.error)
+            if(plain_palico_bot.error != ""):
+                return jsonify(plain_palico_bot.error)
 
         return jsonify(response)
     else:
