@@ -59,6 +59,7 @@ def findItemPage(item_data):
 
 def findKeyQuests(quest_id, quest_type):
     soup = soupLoader("quests")
+    print("Made it!!")
     if quest_type.lower() == "village":
         quest_id = "s0-"+quest_id
     if quest_type.lower() == "hub":
