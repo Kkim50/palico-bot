@@ -59,7 +59,6 @@ def findItemPage(item_data):
 
 def findKeyQuests(quest_id, quest_type):
     soup = soupLoader("quests")
-    print("Made it!!")
     if quest_type.lower() == "village":
         quest_id = "s0-"+quest_id
     if quest_type.lower() == "hub":
@@ -96,6 +95,7 @@ def getCommandPosition(args, search_list):
 
 def items(*args): 
     args = args[0]
+    args = args[1:]
     rank_position = getCommandPosition(args, rank_list)
     if rank_position == len(args)-1:
         item_name = " ".join(args[0:rank_position])
@@ -129,6 +129,8 @@ def items(*args):
 def keyquest(*args):
     args = args[0]
     args = args[1:]
+    print("Arguments")
+    print(args)
     quest_position = getCommandPosition(args, ["hub", "village"])
     quest_type = args[quest_position]
 
