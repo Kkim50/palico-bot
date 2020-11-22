@@ -11,8 +11,8 @@ def api_post():
 
     if (request.method == 'POST'):
         data = request.get_json()
-        str_data = data["message"][0]
-        split_data = data["message"][0].split()
+        str_data = data["message"]
+        split_data = data["message"].split()
         print("str data")
         print(str_data)
         print("Split data")
