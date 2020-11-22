@@ -19,10 +19,10 @@ def api_post():
         print(split_data)
         try:
             if ("!item" in split_data):
-                response = plain_palico_bot.items(str_data)
+                response = plain_palico_bot.items(split_data)
             
             if ("!key" in split_data):
-                response = plain_palico_bot.keyquest(str_data)
+                response = plain_palico_bot.keyquest(split_data)
 
             print(response)
 

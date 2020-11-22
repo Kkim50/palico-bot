@@ -85,7 +85,8 @@ def getCommandPosition(args, search_list):
         for i,item in enumerate(args):
             if item.lower() in search_list:
                 position = i
-        return position
+                return position
+        return -1
 
     except Exception as e:
         print(e)
