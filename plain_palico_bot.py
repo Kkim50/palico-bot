@@ -9,6 +9,7 @@ low_rank_list = ["lr", "low", "l"]
 g_rank_list = ["g", "g-rank"]
 
 rank_list = high_rank_list + low_rank_list + g_rank_list
+error = ""
 
 def soupLoader(command):
     if command == "quests":
@@ -47,6 +48,7 @@ def itemFinder(soup, rank, category):
     
     except Exception as e:
         print(e)
+        error = category.title() + " doesn't exist for this item."
         print(category.title() + " doesn't exist for this item.")
 
 def findItemPage(item_data):
@@ -91,6 +93,7 @@ def getCommandPosition(args, search_list):
     except Exception as e:
         print(e)
         print("Error: Command  not supported!")
+        error = "Error: Command not supported!"
 
 
 def items(*args): 
@@ -144,6 +147,6 @@ def keyquest(*args):
             
     quest_id = args[quest_id_position]
     keyquests = findKeyQuests(quest_id, quest_type)
-
+    response = keyquests
     #Send message to front-end
     return response
