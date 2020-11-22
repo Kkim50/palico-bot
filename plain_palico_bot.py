@@ -126,7 +126,8 @@ def items(*args):
     questMsg = item_name.title() + " [" + rank.title() + " - Quest]"
     
     #Send message to front-end
-    response = itemMapData + "\n" + mapMsg + "\n" + monsterMsg
+    response = []
+    response.append(mapMsg, monsterMsg, questMsg)
     return response
 
 def keyquest(*args):
@@ -145,5 +146,4 @@ def keyquest(*args):
     keyquests = findKeyQuests(quest_id, quest_type)
 
     #Send message to front-end
-    response = keyquests
     return response
