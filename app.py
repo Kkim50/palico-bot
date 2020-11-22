@@ -14,7 +14,6 @@ def api_post():
         split_data = data["message"]).split()
 
         try:
-
             if ("!item" in split_data):
                 response = plain_palico_bot.items(split_data)
             
@@ -22,7 +21,7 @@ def api_post():
                 response = plain_palico_bot.keyquest(split_data)
 
             print(response)
-            
+
         except Exception as e:
             print(e)
             print("Error: Command  not supported!")
