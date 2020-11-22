@@ -96,6 +96,9 @@ def getCommandPosition(args, search_list):
 def items(*args): 
     args = args[0]
     args = args[1:]
+    print("Arguments")
+    print(args)
+
     rank_position = getCommandPosition(args, rank_list)
     if rank_position == len(args)-1:
         item_name = " ".join(args[0:rank_position])
