@@ -93,6 +93,7 @@ def getCommandPosition(args, search_list):
 
 
 def items(*args): 
+    print(args)
     rank_position = getCommandPosition(args, rank_list)
     if rank_position == len(args)-1:
         item_name = " ".join(args[0:rank_position])
