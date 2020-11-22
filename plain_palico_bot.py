@@ -10,8 +10,6 @@ g_rank_list = ["g", "g-rank"]
 
 rank_list = high_rank_list + low_rank_list + g_rank_list
 
-response = "Error: Command Invalid"
-
 def soupLoader(command):
     if command == "quests":
         filename = 'data/quests.html'
@@ -94,7 +92,7 @@ def getCommandPosition(args, search_list):
         print("Error: Command  not supported!")
 
 
-def items(ctx, *args): 
+def items(*args): 
     rank_position = getCommandPosition(args, rank_list)
     if rank_position == len(args)-1:
         item_name = " ".join(args[0:rank_position])
@@ -124,7 +122,6 @@ def items(ctx, *args):
     #Send message to front-end
     response = itemMapData + "\n" + mapMsg + "\n" + monsterMsg
     return response
-
 
 def keyquest(*args):
     quest_position = getCommandPosition(args, ["hub", "village"])
