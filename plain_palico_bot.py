@@ -7,6 +7,7 @@ hub_edgecases = {8: 12, 9: 13, 10: 14, 11: 15,
 high_rank_list = ["hr", "high", "h"]
 low_rank_list = ["lr", "low", "l"]
 g_rank_list = ["g", "g-rank"]
+
 rank_list = high_rank_list + low_rank_list + g_rank_list
 
 response = "Error: Command Invalid"

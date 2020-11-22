@@ -27,6 +27,7 @@ def itemFinder(soup, rank, category):
     low_rank = []
     high_rank = []
     g_rank = []
+    
     try:
         map_snipet = soup.find("h5",text=category)
         container = map_snipet.find_next("table")
