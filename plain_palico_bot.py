@@ -128,6 +128,7 @@ def items(*args):
 
 def keyquest(*args):
     args = args[0]
+    args = args[1:]
     quest_position = getCommandPosition(args, ["hub", "village"])
     quest_type = args[quest_position]
 
