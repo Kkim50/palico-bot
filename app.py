@@ -11,7 +11,7 @@ def api_post():
 
     if (request.method == 'POST'):
         data = request.get_json()
-        split_data = data["message"]).split()
+        split_data = data["message"].split()
 
         try:
             if ("!item" in split_data):
