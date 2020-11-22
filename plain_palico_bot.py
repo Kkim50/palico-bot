@@ -81,12 +81,12 @@ def findKeyQuests(quest_id, quest_type):
 
 def getCommandPosition(args, search_list):
     try:
+        position = -1
         args = list(args)
         for i,item in enumerate(args):
             if item.lower() in search_list:
                 position = i
-                return position
-        return -1
+        return position
 
     except Exception as e:
         print(e)
