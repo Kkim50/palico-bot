@@ -13,7 +13,10 @@ def api_post():
         data = request.get_json()
         str_data = data["message"][0]
         split_data = data["message"][0].split()
-
+        print("str data")
+        print(str_data)
+        print("Split data")
+        print(split_data)
         try:
             if ("!item" in split_data):
                 response = plain_palico_bot.items(str_data)
