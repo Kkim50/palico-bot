@@ -8,8 +8,9 @@ app = Flask(__name__)
 @cross_origin()
 def api_post():
     if (request.method == 'POST'):
-        data = request.form
-        print(data)
+        data = request.get_json()
+        print data["message"]
+        print data["user"]
 
         return jsonify(plain_palico_bot.response)
     else:
