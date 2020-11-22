@@ -11,17 +11,18 @@ def api_post():
 
     if (request.method == 'POST'):
         data = request.get_json()
-        print (data["message"])
+        split_data = data["message"]).split()
 
         try:
-            if ("!item" in data):
-                response = plain_palico_bot.items(data)
+
+            if ("!item" in split_data):
+                response = plain_palico_bot.items(split_data)
             
-            if ("!key" in data):
-                response = plain_palico_bot.items(data)
+            if ("!key" in split_data):
+                response = plain_palico_bot.keyquest(split_data)
 
             print(response)
-
+            
         except Exception as e:
             print(e)
             print("Error: Command  not supported!")
