@@ -18,12 +18,22 @@ def api_post():
         print("Split data")
         print(split_data)
         try:
-            if ("!item" in split_data):
-                response = plain_palico_bot.items(split_data)
-            
-            if ("!key" in split_data):
-                response = plain_palico_bot.keyquest(split_data)
+            try:
+                if ("!item" in split_data):
+                    response = plain_palico_bot.items(split_data)
 
+            except Exception as e:
+                print(e)
+                return(jsonify("Did you mean: !item honey low|high|g-rank...?"))
+
+            try: 
+                if ("!key" in split_data):
+                    response = plain_palico_bot.keyquest(split_data)
+
+            except Exception as e:
+                print(e)
+                return(jsonify("Did you mean: !key hub|village 1|2|3..?"))
+                
             print(response)
 
         except Exception as e:
