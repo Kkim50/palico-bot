@@ -93,7 +93,7 @@ def getCommandPosition(args, search_list):
         print("Error: Command  not supported!")
 
 
-def items(*args): 
+def items(args): 
     print(args)
     rank_position = getCommandPosition(args, rank_list)
     if rank_position == len(args)-1:
@@ -125,7 +125,7 @@ def items(*args):
     response = itemMapData + "\n" + mapMsg + "\n" + monsterMsg
     return response
 
-def keyquest(*args):
+def keyquest(args):
     print(args)
     quest_position = getCommandPosition(args, ["hub", "village"])
     quest_type = args[quest_position]
