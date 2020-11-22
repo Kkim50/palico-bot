@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/api/', methods=['GET', 'POST'])
 @cross_origin()
 def api_post():
-    response = ""
+    response = "Invalid input. Please try again!"
 
     if (request.method == 'POST'):
         data = request.get_json()
@@ -21,7 +21,7 @@ def api_post():
                 response = plain_palico_bot.items(data)
 
             print(response)
-            
+
         except Exception as e:
             print(e)
             print("Error: Command  not supported!")
