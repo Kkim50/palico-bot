@@ -11,14 +11,15 @@ def api_post():
 
     if (request.method == 'POST'):
         data = request.get_json()
+        str_data = data["message"]
         split_data = data["message"].split()
 
         try:
             if ("!item" in split_data):
-                response = plain_palico_bot.items(split_data)
+                response = plain_palico_bot.items(str_data)
             
             if ("!key" in split_data):
-                response = plain_palico_bot.keyquest(split_data)
+                response = plain_palico_bot.keyquest(str_data)
 
             print(response)
 
